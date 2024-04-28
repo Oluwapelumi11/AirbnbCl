@@ -1,0 +1,109 @@
+@import '../../../assets/styles/setup/variables';
+@import '../../../assets/styles/setup/mixins';
+
+.scroller-up {
+  @include center-flex();
+  display: none;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  color: white;
+  box-shadow: 1px 1px 20px 10px $secondary-color;
+  background-color: $secondary-color;
+
+  @include for-tablet-layout {
+    display: flex;
+  }
+
+  @include for-mobile-layout {
+    bottom: 70px;
+  }
+}
+.mybot{
+  position: fixed ;
+  z-index: 30;
+  bottom: 0.2rem;
+  right: 4px;
+  .bla{
+    background-color: white;
+    padding: 5px;
+    position: fixed;
+      bottom: 1px;
+      right: 4px;
+      z-index: 40;
+      width: 29vw;
+    opacity: 100%;
+    .botbutton{
+      border-radius: 10px;
+      background-color: $secondary-color;
+      padding: 8px 16px;
+      color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1rem;
+    position: fixed;
+    bottom: 1px;
+    right: 4px;
+    z-index: 40;
+    width: 29vw;
+    opacity:90%;
+    &:hover{
+      opacity: 100%;
+    }
+  }
+  }
+}
+.clear-filter {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: 30px;
+  border-radius: 50%;
+  height: 50px;
+  left: 30px;
+  width: 50px;
+  cursor: pointer;
+  text-decoration: none;
+  background-color: white;
+  text-align: center;
+  color: white;
+  box-shadow: 1px 1px 20px 10px lightgray;
+  z-index: 100;
+
+  @include for-mobile-layout {
+    bottom: 55px;
+  }
+
+  img {
+    width: 30px;
+  }
+
+}
+
+.toggle-map {
+  background: rgb(34, 34, 34);
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  z-index: 50;
+  transform: translateX(-50%);
+  color: white;
+  padding: 14px 19px;
+  border-radius: 24px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.25s ease 0s;
+
+  &:hover {
+    border-color: rgba(0, 0, 0, 0.08);
+    box-shadow: 0 0 0 1px transparent, 0 0 0 4px transparent, 0 6px 16px rgba(0, 0, 0, 0.12);
+    transform: scale(1.04) translateX(-47.5%);
+  }
+
+}
