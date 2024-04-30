@@ -67,13 +67,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  async onSignDemo() {
-    const demoCoords = this.userService.getEmptyUser() as User
-    demoCoords.username = 'demo'
-    demoCoords.password = 'demo'
-    await this.userService.login(demoCoords)
-    this.router.navigateByUrl('')
-  }
+ 
 
   async uploadImg(ev: Event) {
     const { secure_url, height, width } = await this.uploadImgService.uploadImg(ev)

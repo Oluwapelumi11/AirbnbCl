@@ -34,14 +34,15 @@ export class  StayIndexComponent implements OnInit, OnDestroy {
   mapIcon = faMapLocationDot
 
   async ngOnInit() {
-    // this.subscriptionStayLength = this.stayService.stayLength$.subscribe(stayLength => {
-    //   this.stayFullLength = stayLength
-    //   this.stayLoadIndex = 1
-    // }
-  
-  // )
-
     this.loader.setLoading(true)
+    // // this.subscriptionStayLength = this.stayService.stayLength$.subscribe(stayLength => {
+    //     this.stayFullLength = stayLength
+    //     this.stayLoadIndex = 1
+    //   }
+      
+      // )
+      
+      // this.loader.setLoading(true)
     await this.setFilterFromParams()
     this.stays$ = this.stayService.stays$
     window.addEventListener('scroll', () => this.onScroll())
@@ -53,7 +54,8 @@ export class  StayIndexComponent implements OnInit, OnDestroy {
     this.stays$.subscribe((val:any)=>{ 
       console.log(val)
       this.loader.setLoading(false)
-
+      this.isLoadStay = true
+      
     })
   }
 
