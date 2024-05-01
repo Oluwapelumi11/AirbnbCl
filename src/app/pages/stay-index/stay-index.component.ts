@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { Stay, StayFilter } from 'src/app/models/stay.model';
 import { LoaderService } from 'src/app/services/loader.service';
 import { StayService } from 'src/app/services/stay.service';
@@ -32,9 +32,12 @@ export class  StayIndexComponent implements OnInit, OnDestroy {
   isShowMap:boolean = false
   listIcon = faList
   mapIcon = faMapLocationDot
-
+  _loaded = new BehaviorSubject<boolean>(false);
+  loaded$ :Observable<boolean> = this._loaded.asObservable();
+  
   async ngOnInit() {
     this.loader.setLoading(true)
+    this._loaded.next(true)
     // // this.subscriptionStayLength = this.stayService.stayLength$.subscribe(stayLength => {
     //     this.stayFullLength = stayLength
     //     this.stayLoadIndex = 1
@@ -53,6 +56,7 @@ export class  StayIndexComponent implements OnInit, OnDestroy {
     console.log("stays: ")
     this.stays$.subscribe((val:any)=>{ 
       console.log(val)
+      this._loaded.next(true)
       this.loader.setLoading(false)
       this.isLoadStay = true
       
@@ -79,6 +83,7 @@ export class  StayIndexComponent implements OnInit, OnDestroy {
       ...this.activatedRoute.snapshot.queryParams as StayFilter
     }
     await this.stayService.setFilterAsync(stayFilter)
+    this._loaded.next(true)
   }
 
   onPageUp() {
