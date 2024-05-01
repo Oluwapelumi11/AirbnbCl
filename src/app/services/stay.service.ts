@@ -131,8 +131,8 @@ export class StayService {
         location: '',
         about: '',
         responseTime: '',
-        thumbnailUrl: "https://a0.muscache.com/im/pictures/542dba0c-eb1b-4ab3-85f3-94d3cc8f87a4.jpg?aki_policy=profile_small",
-        pictureUrl: "https://xsgames.co/randomusers/avatar.php?g=male",
+        thumbnailUrl: "https://xsgames.co/randomusers/avatar.php?g=male",
+        pictureUrl: "https://res.cloudinary.com/dvdgrrdwe/image/upload/v1714581355/person-button-svgrepo-com_1_seehmi.svg",
         isSuperhost: true,
         policyNumber: 36133410
       },
