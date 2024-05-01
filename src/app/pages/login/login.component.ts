@@ -58,8 +58,13 @@ export class LoginComponent implements OnInit {
     console.log(coords)
     const user = { ...coords, imgUrl: this.imgData.imgUrl, hostMsg: 0, userMsg: 0 }
     try {
-      if (this.isSignup) await this.userService.signup(user)
-      else await this.userService.login(coords)
+    if (this.isSignup) {await this.userService.signup(user)
+      this.snackBar.open('Account Created Successfully, Please proceed to Login', 'Close', { duration: 3000 })
+    this.router.navigateByUrl('login')
+    }
+      else { await this.userService.login(coords)
+    this.snackBar.open('Logged In Successfully', 'Close', { duration: 3000 })
+}
       this.router.navigateByUrl('')
     } catch (err) {
       this.snackBar.open('Username or password wrong', 'Close', { duration: 3000 })
