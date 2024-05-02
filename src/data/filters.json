@@ -6,7 +6,7 @@
       },
       {
             "txt": "Amazing views",
-            "translate": "stay.filter.amazing-views",
+            "translate": "stay.filter.amazing",
             "img": "https://res.cloudinary.com/du63kkxhl/image/upload/v1685446872/stay-filter/amazing-views_ovr5cr.png"
       },
       {
@@ -41,7 +41,7 @@
       },
       {
             "txt": "Lake front",
-            "translate": "stay.filter.lake-front",
+            "translate": "stay.filter.lake",
             "img": "https://res.cloudinary.com/du63kkxhl/image/upload/v1685446871/stay-filter/lake-front_n4yzrj.png"
       },
       {
@@ -51,7 +51,7 @@
       },
       {
             "txt": "Tiny homes",
-            "translate": "stay.filter.tiny-homes",
+            "translate": "stay.filter.homes",
             "img": "https://res.cloudinary.com/du63kkxhl/image/upload/v1685446872/stay-filter/tiny-homes_bjldpu.png"
       },
       {
@@ -66,7 +66,7 @@
       },
       {
             "txt": "Creative spaces",
-            "translate": "stay.filter.creative-spaces",
+            "translate": "stay.filter.creative",
             "img": "https://res.cloudinary.com/du63kkxhl/image/upload/v1685446871/stay-filter/creative-spaces_uqa2hh.png"
       },
       {
