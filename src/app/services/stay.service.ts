@@ -43,11 +43,15 @@ export class StayService {
 
   public query(filterBy: StayFilter) {
     const queryParams = this.getQueryParams(filterBy)
-    console.log(queryParams)
-    return this.httpService.get(this.STAY_URL+'filterListing' + queryParams).subscribe((res:any) => {
-      console.log(res)
-      this._stays$.next(res)
-    })
+    console.log(this.STAY_URL+'filterListing' + queryParams)
+    if(queryParams !== this.getQueryParams(this.getEmptyFilter())){
+      return this.httpService.get(this.STAY_URL+'filterListing' + queryParams).subscribe((res:any) => {
+        console.log(res)
+        this._stays$.next(res)
+      })
+      }else{
+        return this.loadStays();
+      }
     }
 
   public async loadFullLength() {
@@ -97,9 +101,10 @@ export class StayService {
 
   public setFilter(filter: StayFilter) {
     this._stayFilter$.next(filter)
-    // this.loadFullLength()
+    this.loadFullLength()
     // this.loadStays()
     this.query(filter);
+    console.log(filter)
   }
   
   public async setFilterAsync(filter: StayFilter) {

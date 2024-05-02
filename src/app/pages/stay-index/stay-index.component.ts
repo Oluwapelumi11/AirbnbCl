@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription, filter } from 'rxjs';
 import { Stay, StayFilter } from 'src/app/models/stay.model';
 import { LoaderService } from 'src/app/services/loader.service';
 import { StayService } from 'src/app/services/stay.service';
@@ -89,6 +89,7 @@ export class  StayIndexComponent implements OnInit, OnDestroy {
     } else {
       await this.stayService.setFilterAsync(stayFilter)
       this.stayService.query(stayFilter)
+      console.log(stayFilter)
     }
   
     this._loaded.next(true);

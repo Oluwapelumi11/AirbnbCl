@@ -27,7 +27,7 @@ export class SearchPlaceModalComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges) {
     if(this.stays) this.makePlaces()
-    this.stayService.query(this.stayFilter)
+    // this.stayService.query(this.stayFilter)
 
   }
 
@@ -46,7 +46,7 @@ export class SearchPlaceModalComponent implements OnInit {
   setFilter(place: string) {
     this.setSearchFilter.emit(place)
     this.stayFilter.place = place
-    this.stayService.query(this.stayFilter)
+    // this.stayService.query(this.stayFilter)
   }
 
   // Expression has changed after it was checked
