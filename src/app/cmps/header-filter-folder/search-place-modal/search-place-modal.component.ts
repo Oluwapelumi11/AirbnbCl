@@ -18,12 +18,17 @@ export class SearchPlaceModalComponent implements OnInit {
   places: string[] = []
 
   async ngOnInit() {
-    this.stays =  await lastValueFrom(this.stayService.query(this.stayService.getEmptyFilter()))
+    this.stayService.query(this.stayService.getEmptyFilter())
+    this.stayService.stays$.subscribe((res:any) =>{
+      this.stays = res
+    })
     this.makePlaces()
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if(this.stays) this.makePlaces()
+    this.stayService.query(this.stayFilter)
+
   }
 
   makePlaces() {
@@ -41,6 +46,7 @@ export class SearchPlaceModalComponent implements OnInit {
   setFilter(place: string) {
     this.setSearchFilter.emit(place)
     this.stayFilter.place = place
+    this.stayService.query(this.stayFilter)
   }
 
   // Expression has changed after it was checked

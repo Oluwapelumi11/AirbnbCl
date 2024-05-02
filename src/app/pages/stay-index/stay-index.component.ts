@@ -55,7 +55,7 @@ export class  StayIndexComponent implements OnInit, OnDestroy {
     })
     console.log("stays: ")
     this.stays$.subscribe((val:any)=>{ 
-      console.log(val)
+    // this.stays$ = val
       this._loaded.next(true)
       this.loader.setLoading(false)
       this.isLoadStay = true
@@ -69,7 +69,7 @@ export class  StayIndexComponent implements OnInit, OnDestroy {
    
         // this.isLoadStay = true
         // this.loader.setLoading(true)
-        await this.stayService.loadStays();
+        // await this.stayService.loadStays();
         this.isLoadStay = true
         this.loader.setLoading(false)
         this.stayLoadIndex++
@@ -78,13 +78,22 @@ export class  StayIndexComponent implements OnInit, OnDestroy {
   }
 
   async setFilterFromParams() {
+    const queryParams = this.activatedRoute.snapshot.queryParams;
     const stayFilter = {
       ...this.stayService.getEmptyFilter(),
-      ...this.activatedRoute.snapshot.queryParams as StayFilter
+      ...queryParams as StayFilter
     }
-    await this.stayService.setFilterAsync(stayFilter)
-    this._loaded.next(true)
+  
+    if (Object.keys(queryParams).length === 0) {
+      this.stayService.loadStays();
+    } else {
+      await this.stayService.setFilterAsync(stayFilter)
+      this.stayService.query(stayFilter)
+    }
+  
+    this._loaded.next(true);
   }
+  
 
   onPageUp() {
     window.scrollTo(0, 0)

@@ -43,14 +43,18 @@ export class StayService {
 
   public query(filterBy: StayFilter) {
     const queryParams = this.getQueryParams(filterBy)
-    return this.httpService.get(this.STAY_URL+'filterListing' + queryParams) as Observable<Stay[]>
-  }
+    console.log(queryParams)
+    return this.httpService.get(this.STAY_URL+'filterListing' + queryParams).subscribe((res:any) => {
+      console.log(res)
+      this._stays$.next(res)
+    })
+    }
 
   public async loadFullLength() {
     const filterBy = this._stayFilter$.value
     const queryParams = this.getQueryParams(filterBy)
 
-    const stayLength = await lastValueFrom(this.httpService.get(this.STAY_URL + 'length?' + queryParams,)) as number
+    const stayLength = await lastValueFrom(this.httpService.get(this.STAY_URL + 'filterListing' + queryParams)) as number
     this._stayLength$.next(stayLength)
   }
 
@@ -93,19 +97,17 @@ export class StayService {
 
   public setFilter(filter: StayFilter) {
     this._stayFilter$.next(filter)
-    this.loadFullLength()
-    this.loadStays()
+    // this.loadFullLength()
+    // this.loadStays()
     this.query(filter);
   }
   
   public async setFilterAsync(filter: StayFilter) {
     this._stayFilter$.next(filter)
     console.log(filter)
-    this.loadFullLength()
-    this.loadStays()
-    this.query(filter).subscribe((res:any) =>{
-      console.log(res);
-    });
+    // this.loadFullLength()
+    // this.loadStays()
+    this.query(filter);
   }
 
   
@@ -159,12 +161,12 @@ export class StayService {
   }
 
   private getQueryParams(filterBy: StayFilter, index: number = 0) {
-    let params = ``;
-    if (filterBy.likeByUser) params += `likeByUser=${filterBy.likeByUser}&`
-    if (filterBy.hostId) params += `hostId=${filterBy.hostId}&`
-    if (filterBy.label) params += `label=${filterBy.label}&`
-    if (filterBy.isPetAllowed) params += `isPetAllowed=${filterBy.isPetAllowed}&`
-    if (filterBy.place) params += `place=${filterBy.place}`
+    let params = "";
+    if (filterBy.likeByUser) params !=="" ? params += `&likeByUser=${filterBy.likeByUser}` : params += `?likeByUser=${filterBy.likeByUser}` ;
+    if (filterBy.hostId) params !=="" ? params += `&hostId=${filterBy.hostId}` : params += `?hostId=${filterBy.hostId}` ;
+    if (filterBy.label) params !=="" ? params += `&label=${filterBy.label}` : params += `?label=${filterBy.label}` ;
+    if (filterBy.isPetAllowed) params !=="" ? params += `&isPetAllowed=${filterBy.isPetAllowed}` : params += `?isPetAllowed=${filterBy.isPetAllowed}` ;
+    if (filterBy.place) params !=="" ? params += `&place=${filterBy.place}` : params += `?place=${filterBy.place}` ;
     return params
   }
 
