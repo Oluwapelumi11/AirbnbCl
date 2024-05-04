@@ -26,28 +26,35 @@ export class StayService {
   private _stayLength$ = new BehaviorSubject<number>(1)
   public stayLength$ = this._stayLength$.asObservable()
 
+ private  _loaded = new BehaviorSubject<boolean>(false);
+  public loaded$ :Observable<boolean> = this._loaded.asObservable();
+  
   public loadStays() {
+    this._loaded.next(false)
     this.httpService.get(this.STAY_URL + "getalllistings")
       .pipe(
         catchError((err: any) => {
           console.error('Error loading stays:', err);
-          return throwError(err); 
+          return err; 
         })
       )
       .subscribe(
         (stays: any) => {
           this._stays$.next(stays.data);
+          this._loaded.next(true)
         }
       );
   }
 
   public query(filterBy: StayFilter) {
+    this._loaded.next(false)
     const queryParams = this.getQueryParams(filterBy)
     console.log(this.STAY_URL+'filterListing' + queryParams)
     if(queryParams !== this.getQueryParams(this.getEmptyFilter())){
       return this.httpService.get(this.STAY_URL+'filterListing' + queryParams).subscribe((res:any) => {
-        console.log(res)
         this._stays$.next(res)
+        this._loaded.next(true)
+      
       })
       }else{
         return this.loadStays();

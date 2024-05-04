@@ -32,13 +32,11 @@ export class  StayIndexComponent implements OnInit, OnDestroy {
   isShowMap:boolean = false
   listIcon = faList
   mapIcon = faMapLocationDot
-  _loaded = new BehaviorSubject<boolean>(false);
-  loaded$ :Observable<boolean> = this._loaded.asObservable();
   
   async ngOnInit() {
-    this._loaded.subscribe(res => {
-      console.log(res)
-      })
+    this.stayService.loaded$.subscribe(res => {
+      this.isLoadStay = res  
+    console.log(res)    })
       this.loader.setLoading(true)
     // // this.subscriptionStayLength = this.stayService.stayLength$.subscribe(stayLength => {
     //     this.stayFullLength = stayLength
@@ -55,16 +53,16 @@ export class  StayIndexComponent implements OnInit, OnDestroy {
     this.subscription = this.stayService.stayFilter$.subscribe(stayFilter => {
       this.isShowClearBtn = this.checkIfClearFilter(stayFilter)
     })
-    console.log("stays: ")
-    this.stays$.subscribe((val:any)=>{ 
-    // this.stays$ = val
-    if(val?.length){
-      this.loader.setLoading(false)
-      this.isLoadStay = true
-      this._loaded.next(true)
-    }
+    // console.log("stays: ")
+    // this.stays$.subscribe((val:any)=>{ 
+    // // this.stays$ = val
+    // if(val?.length){
+    //   this.loader.setLoading(false)
+    //   this.isLoadStay = true
+    //   this._loaded.next(true)
+    // }
     
-    })
+    // })
   }
 
   async onPageScroll() {
@@ -93,11 +91,9 @@ export class  StayIndexComponent implements OnInit, OnDestroy {
     } else {
       await this.stayService.setFilterAsync(stayFilter)
       this.stayService.query(stayFilter)
-      console.log(stayFilter)
     }
   
-    this._loaded.next(true);
-    console.log(this.loaded$)
+   
   }
   
 
