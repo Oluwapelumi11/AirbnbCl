@@ -3,6 +3,7 @@
 
 .stay-details {
   font-family: $main-font;
+  padding: 5px 8px;
 
   @include for-mobile-layout {
     .main-layout {
