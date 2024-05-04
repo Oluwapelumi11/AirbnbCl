@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
     const user = { ...coords, imgUrl: this.imgData.imgUrl, hostMsg: 0, userMsg: 0 }
     try {
     if (this.isSignup) {await this.userService.signup(user)
-      this.snackBar.open('Account Created Successfully, Please proceed to Login', 'Close', { duration: 3000 })
+      this.snackBar.open('Account Created Successfully', 'Close', { duration: 3000 })
     this.router.navigateByUrl('login')
     }
       else { await this.userService.login(coords)

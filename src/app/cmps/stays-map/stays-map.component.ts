@@ -15,7 +15,7 @@ export class StaysMapComponent implements OnInit {
    }
   location !: googleMapLoc
   display: any
-  center: google.maps.LatLngLiteral = { lat:  6.5244, lng: 3.3792 }
+  center: google.maps.LatLngLiteral = { lat:51.50853, lng: -0.12574 }
   zoom = 9
   maxZoom = 15
   minZoom = 2
