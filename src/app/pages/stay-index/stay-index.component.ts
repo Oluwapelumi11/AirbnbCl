@@ -36,8 +36,10 @@ export class  StayIndexComponent implements OnInit, OnDestroy {
   loaded$ :Observable<boolean> = this._loaded.asObservable();
   
   async ngOnInit() {
-    this.loader.setLoading(true)
-    this._loaded.next(true)
+    this._loaded.subscribe(res => {
+      console.log(res)
+      })
+      this.loader.setLoading(true)
     // // this.subscriptionStayLength = this.stayService.stayLength$.subscribe(stayLength => {
     //     this.stayFullLength = stayLength
     //     this.stayLoadIndex = 1
@@ -56,10 +58,12 @@ export class  StayIndexComponent implements OnInit, OnDestroy {
     console.log("stays: ")
     this.stays$.subscribe((val:any)=>{ 
     // this.stays$ = val
-      this._loaded.next(true)
+    if(val?.length){
       this.loader.setLoading(false)
       this.isLoadStay = true
-      
+      this._loaded.next(true)
+    }
+    
     })
   }
 
@@ -93,6 +97,7 @@ export class  StayIndexComponent implements OnInit, OnDestroy {
     }
   
     this._loaded.next(true);
+    console.log(this.loaded$)
   }
   
 
