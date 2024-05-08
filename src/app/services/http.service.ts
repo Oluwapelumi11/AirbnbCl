@@ -9,7 +9,7 @@ export class HttpService {
   constructor(private http: HttpClient) { }
 
   // isDevMode() ?
-  BASE_URL = "https://d7yy2wq7avl45gfah24wotlgqa0pghup.lambda-url.us-east-1.on.aws/";
+  BASE_URL = "https://zjm7x4yfmyuxejrdx6x5b3vram0yisar.lambda-url.us-east-1.on.aws/";
   // headers = new HttpHeaders({
   // 'Content-Type': 'application/json',
   // // 'Authorization': 'Bearer <token>',
